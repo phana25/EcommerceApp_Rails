@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resource :session
   resources :passwords, param: :token
   namespace :admin do
+    resources :products
     resources :categories
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -20,4 +21,8 @@ Rails.application.routes.draw do
   # root "posts#index"
   root "protected#index"
   get "admin" => "admin#index"
+
+    Rails.application.routes.draw do
+      get "admin/index", to: "admin#index", as: "admin_index"
+    end
 end
