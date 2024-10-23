@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get "home", to: "home#index", as: :home
+  resource :registrations, only: %i[create new]
+  resource :session
+  resources :passwords, param: :token
   namespace :admin do
     resources :categories
   end
@@ -14,6 +18,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-
+  root "protected#index"
   get "admin" => "admin#index"
 end
