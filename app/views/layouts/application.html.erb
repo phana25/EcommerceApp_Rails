@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Eommmerce App" %></title>
+    <title><%= content_for(:title) || "Ecommerce_App" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
@@ -17,14 +17,22 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%# Includes all stylesheet files in app/views/stylesheets %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+    <main class="container flex flex-col px-5 mx-auto mt-28">
+
+      <% if alert = flash[:alert] %>
+        <p class="inline-block px-3 py-2 mb-5 font-medium text-red-500 rounded-lg bg-red-50" id="alert"><%= alert %></p>
+      <% end %>
+
+      <% if notice = flash[:notice] %>
+        <p class="inline-block px-3 py-2 mb-5 font-medium text-green-500 rounded-lg bg-green-50" id="notice"><%= notice %></p>
+      <% end %>
       <%= yield %>
     </main>
   </body>
