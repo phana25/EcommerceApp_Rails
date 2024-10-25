@@ -4,9 +4,19 @@ Rails.application.routes.draw do
   resource :session
   resources :passwords, param: :token
   namespace :admin do
-    resources :products
+    resources :products do
+      resources :stocks
+    end
     resources :categories
+    resources :orders
   end
+
+  namespace :api do
+    namespace :v1 do
+      resources :orders
+    end
+  end
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -22,7 +32,7 @@ Rails.application.routes.draw do
   root "protected#index"
   get "admin" => "admin#index"
 
-    Rails.application.routes.draw do
-      get "admin/index", to: "admin#index", as: "admin_index"
-    end
+  Rails.application.routes.draw do
+    get "admin/index", to: "admin#index", as: "admin_index"
+  end
 end
