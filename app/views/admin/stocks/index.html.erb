@@ -13,6 +13,7 @@
       <%= render stock %>
       <p>
         <div>
+            <%= link_to "Edit this stock", edit_admin_product_stock_path(stock.product.id, stock.id), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
             <%= link_to "Show this stock", admin_product_stock_path(stock.product.id, stock.id), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
         </div>
       </p>
