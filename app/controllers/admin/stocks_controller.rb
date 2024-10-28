@@ -25,7 +25,7 @@ class Admin::StocksController < AdminController
   # POST /admin/stocks or /admin/stocks.json
   def create
     @product = Product.find(params[:product_id])
-    @admin_stock = @product.stock.new(admin_stock_params)
+    @admin_stock = @product.stocks.new(admin_stock_params)
 
     respond_to do |format|
       if @admin_stock.save
@@ -69,6 +69,6 @@ class Admin::StocksController < AdminController
 
     # Only allow a list of trusted parameters through.
     def admin_stock_params
-      params.require(:stock).permit(:size, :amount)
+      params.require(:stock).permit(:name, :value)
     end
 end

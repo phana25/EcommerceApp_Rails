@@ -4,7 +4,7 @@
   <% end %>
 
   <div class="flex justify-between items-center mb-5">
-    <h1 class="font-bold text-4xl">Orders</h1>
+    <h1 class="font-bold text-4xl">Orders <%= @total_orders %> </h1>
   </div>
 
   <div class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
@@ -57,7 +57,10 @@
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><%= order.created_at.strftime("%d %b %Y") %></td>
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-              <a href=""><i class="fa fa-eye"></i></a>
+              <a href=""></a>
+              <%= link_to admin_order_path(order), class: "hover:text-gray-900 ml-3" do %>
+                <i class="fa fa-eye"></i>
+              <% end %>
               <%= link_to admin_order_path(order), method: :delete, data: { confirm: "Are you sure?" }, class: "text-red-600 hover:text-red-900 ml-3" do %>
                 <i class="fa fa-trash-alt"></i>
               <% end %>
