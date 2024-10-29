@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "products/index"
   get "home", to: "home#index", as: :home
   resource :registrations, only: %i[create new]
   resource :session
@@ -33,6 +34,8 @@ Rails.application.routes.draw do
   # root "posts#index"
   root "protected#index"
   get "admin" => "admin#index"
+
+  resources :products, only: [ :show ]
 
   Rails.application.routes.draw do
     get "admin/index", to: "admin#index", as: "admin_index"
