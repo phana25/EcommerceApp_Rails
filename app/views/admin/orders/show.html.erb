@@ -7,7 +7,7 @@
     <h1 class="font-bold text-4xl mb-4">Order Details</h1>
   </div>
 
-  <div id="admin_order" class="min-w-full">
+  <div id="admin_order" class="min-w-full"> 
     <div class="bg-white p-6 rounded-lg shadow">
       <h3 class="text-gray-700 font-bold mb-1">Order ID: <%= @order.id %></h3>
       <p class="text-xl mb-1">Ordered At: <%= @order.created_at%></p>
@@ -15,6 +15,9 @@
       <p class="text-xl mb-1">Phone Number: <%= @order.phone_number %></p>
       <hr class="my-4 mt-2 mb-2">
       <p class="text-xl mb-1">Product: <%= @order.product.category.name %> - <%= @order.product.name %></p>
+      <% @order_items.each do |item| %>
+      <p class="text-xl mb-1"><%= item.stock.name %>: <%= item.stock.value %></p>
+      <% end %>
       <p class="text-xl mb-1">Price: <%= @order.product.price %> $</p>
       <p class="text-xl mb-1">Amount: <%= @order.amount %></p>
       <p class="text-xl mb-1">Total Price: <%= @order.product.price * @order.amount %> $</p>

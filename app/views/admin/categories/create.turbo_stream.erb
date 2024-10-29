@@ -1,0 +1,2 @@
+<%= turbo_stream.append "categories", partial: "category", locals: { category: @admin_category } %>
+<%= turbo_stream.replace "new_category", partial: "form", locals: { admin_category: Category.new } %>
