@@ -1,21 +1,48 @@
-<div class="mx-auto md:w-2/3 w-full">
-  <h1 class="font-bold text-4xl">Sign in</h1>
-
-  <%= form_with url: session_url, class: "contents" do |form| %>
-    <div class="my-5">
-      <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address], class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+<div class="font-[sans-serif]">
+  <div class="grid lg:grid-cols-3 md:grid-cols-2 items-center gap-4 h-full">
+    <div class="max-md:order-1 lg:col-span-2 md:h-screen w-full bg-[#000842] md:rounded-tr-xl md:rounded-br-xl lg:p-12 p-8">
+      <img src="https://readymadeui.com/signin-image.webp" class="lg:w-[70%] w-full h-full object-contain block mx-auto" alt="login-image" />
     </div>
 
-    <div class="my-5">
-      <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password", maxlength: 72, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
-    </div>
+    <div class="w-full p-6">
+      <h3 class="text-gray-800 text-3xl font-extrabold">Sign in</h3>
+      <p class="text-sm mt-4 text-gray-800">
+        Don't have an account?
+        <%= link_to "Register here", new_registrations_path, class: "text-blue-600 font-semibold hover:underline ml-1 whitespace-nowrap" unless controller_name == 'registrations'%>
+      </p>
 
-    <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
-      <div class="inline">
-        <%= form.submit "Sign in", class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
-      </div>
+      <%= form_with url: session_path, local: true, class: "contents" do |form| %>
+        <div class="my-5">
+          <%= form.label :email_address, "Email", class: "text-gray-800 text-[15px] mb-2 block" %>
+          <div class="relative flex items-center">
+            <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter email", value: params[:email_address], class: "w-full text-sm text-gray-800 bg-gray-100 focus:bg-transparent px-4 py-3.5 rounded-md outline-blue-600" %>
+            <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" class="w-[18px] h-[18px] absolute right-4" alt="email icon" />
+          </div>
+        </div>
 
-      <%= render 'shared/users'%>
+        <div class="my-5">
+          <%= form.label :password, "Password", class: "text-gray-800 text-[15px] mb-2 block" %>
+          <div class="relative flex items-center">
+            <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter password", maxlength: 72, class: "w-full text-sm text-gray-800 bg-gray-100 focus:bg-transparent px-4 py-3.5 rounded-md outline-blue-600", id: "password" %>
+            <img src="https://cdn-icons-png.flaticon.com/512/565/565655.png" class="w-[18px] h-[18px] absolute right-4 cursor-pointer" alt="show password icon" onclick="togglePassword()" />
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-between gap-4 mt-4">
+          <div class="flex items-center">
+            <%= form.check_box :remember_me, class: "h-4 w-4 shrink-0 text-blue-600 focus:ring-blue-500 border-gray-300 rounded-md" %>
+            <%= form.label :remember_me, "Remember me", class: "ml-3 block text-sm" %>
+          </div>
+          <%= link_to "Forgot Password?", new_password_path, class: "text-blue-600 font-semibold text-sm hover:underline" unless controller_name == 'passwords'%>
+        </div>
+
+        <div class="mt-8">
+          <%= form.submit "Sign in",class: "w-full py-3 px-6 text-sm tracking-wide rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none"%>
+          <%= link_to "Sign in", new_session_path, class: "text-gray-700 underline" unless controller_name == 'sessions' %>
+        </div>
+      <% end %>
     </div>
-  <% end %>
+  </div>
 </div>
+
+
