@@ -5,12 +5,12 @@ class Admin::OrdersController < AdminController
   def index
     @admin_orders = Order.all
     @total_orders = Order.count
-    Rails.logger.debug "Total Orders: #{@total_orders}"
   end
 
   # GET /admin/categories/1 or /admin/categories/1.json
   def show
     @order = Order.find(params[:id])
+    @order_items = @order.order_items
   end
 
   # GET /admin/categories/new

@@ -4,6 +4,7 @@ class Admin::CategoriesController < AdminController
   # GET /admin/categories or /admin/categories.json
   def index
     @admin_categories = Category.all
+    @admin_category = Category.new
   end
 
   # GET /admin/categories/1 or /admin/categories/1.json
@@ -22,16 +23,19 @@ class Admin::CategoriesController < AdminController
   # POST /admin/categories or /admin/categories.json
   def create
     @admin_category = Category.new(admin_category_params)
-
-    respond_to do |format|
-      if @admin_category.save
-        format.html { redirect_to admin_category_url(@admin_category), notice: "Category was successfully created." }
-        format.json { render :show, status: :created, location: @admin_category }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @admin_category.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @admin_category.save
+          # format.html { redirect_to admin_category_url(@admin_category), notice: "Category was successfully created." }
+          # format.json { render :show, status: :created, location: @admin_category }
+          # redirect_to admin_categories_path, notice: "Category was successfully created."
+          format.turbo_stream
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          # format.json { render json: @admin_category.errors, status: :unprocessable_entity }
+          # @admin_categories = Category.all
+          # render :index
+        end
       end
-    end
   end
 
   # PATCH/PUT /admin/categories/1 or /admin/categories/1.json
